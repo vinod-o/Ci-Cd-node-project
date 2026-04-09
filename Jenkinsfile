@@ -8,6 +8,7 @@ pipeline{
     stages{
         stage("checkout"){
             steps{
+                echo 'checkout the code from git-hub'
                 git branch: 'main', url: 'https://github.com/vinod-o/Ci-Cd-node-project.git'
             }
         }
