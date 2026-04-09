@@ -14,6 +14,7 @@ pipeline{
         }
         stage("docker build"){
             steps{
+                echo "build the image backend"
                 sh 'docker build -t ${IMAGE_BACKEND}:${BUILD_NUMBER} ./backend'
             }
         }
@@ -25,7 +26,7 @@ pipeline{
         }
         stage("push image to docke hub"){
             steps{
-                withCredentials([string(credentialsId: 'dockerhub', variable: 'DOCKER_PASS')]){
+                withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_PASS')]){
                     sh '''
                     echo $DOCKER_PASS |docker login -u vinodo3735 --password-stdin
                     docker push ${IMAGE_FRONTEND}:${BUILD_NUMBER}
