@@ -19,7 +19,7 @@ pipeline{
         }
         stage("docker frontent image"){
             steps{
-                sh 'docker build -t ${IMAGE_FRONTEND}:${BUILD_NUMBER} ./frontend'
+                sh 'docker build -t ${IMAGE_FRONTEND}:${BUILD_NUMBER} ./frontent'
             }
         }
     }
