@@ -25,10 +25,11 @@ pipeline{
         }
         stage("push image to docke hub"){
             steps{
-                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]){
-                    sh 'docker login -u vinodo3735 -p ${dockerhub}'
-                    sh 'docker push ${IMAGE_FRONTEND}:${BUILD_NUMBER}'
-                    sh 'docker push ${IMAGE_BACKEND}:${BUILD_NUMBER}'
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'DOCKER_PASS')]){
+                    sh '''
+                    echo $DOCKER_PASS |docker login -u vinodo3735 --password-stdin
+                    docker push ${IMAGE_FRONTEND}:${BUILD_NUMBER}
+                    docker push ${IMAGE_BACKEND}:${BUILD_NUMBER} '''
                     echo "pushed sucessfully"
                 }
             }
