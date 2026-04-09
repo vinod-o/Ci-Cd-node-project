@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage("checkout"){
             steps{
-                git branch: 'main', url: ''
+                git branch: 'main', url: 'https://github.com/vinod-o/Ci-Cd-node-project.git'
             }
         }
         stage("docker build"){
