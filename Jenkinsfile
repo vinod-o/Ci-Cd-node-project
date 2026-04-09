@@ -25,7 +25,7 @@ pipeline{
         }
         stage("push image to docke hub"){
             steps{
-                withCredentails([string(credentialsId: 'dockerhub', variable: 'dockerhub')]){
+                withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]){
                     sh 'docker login -u vinod-o -p ${dockerhub}'
                     sh 'docker push ${IMAGE_FRONTEND}:${BUILD_NUMBER}'
                     sh 'docker push ${IMAGE_BACKEND}:${BUILD_NUMBER}'
