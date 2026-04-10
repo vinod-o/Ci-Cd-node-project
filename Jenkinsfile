@@ -12,6 +12,18 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/vinod-o/Ci-Cd-node-project.git'
             }
         }
+        stage('sast'){
+            steps{
+                echo "sonarqube code analysis "
+                withSonarQubeEnv('sonarqube'){
+                    sh '''
+                      sonar-scanner \
+                      -Dsonar.projectKey=CI-CD PROJECTS \
+                      -Dsonar.sources=backend,frontent 
+                      '''
+                }
+            }
+        }
         stage("docker build"){
             steps{
                 echo "build the image backend"
