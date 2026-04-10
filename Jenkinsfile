@@ -5,8 +5,8 @@ pipeline{
         IMAGE_BACKEND = "${DOCKER_HUB}/backend"
         IMAGE_FRONTEND = "${DOCKER_HUB}/frontent"
     }
-    tools{
-        sonarScanner 'sonar-scanner'
+    tools {
+    sonarQube 'sonar-scanner'
     }
     stages{
         stage("checkout"){
@@ -17,15 +17,17 @@ pipeline{
         }
         stage('sast'){
             steps{
-                echo "sonarqube code analysis "
-                withSonarQubeEnv('sonarqube'){
-                    sh '''
-                      $SONAR_SCANNER_HOME/bin/sonar-scanner \
-                      -Dsonar.projectKey=CI-CD-PROJECTS \
-                      -Dsonar.sources=backend,frontent 
-                      '''
+                script {
+                    def scannerHome = tool 'sonar-scanner'
+                    
+                    withSonarQubeEnv('sonarqube') {
+                        sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                          -Dsonar.projectKey=ci-cdproject \
+                          -Dsonar.sources=backend,frontent
+                        """
+                    }
                 }
-            }
         }
         stage("docker build"){
             steps{
