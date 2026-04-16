@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: frontend-image
-          image: vinodo3735/frontent:445
+          image: vinodo3735/frontent:446
           ports:
             - containerPort: 80
