@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: backend-container
-          image: vinodo3735/backend:263
+          image: vinodo3735/backend:264
           ports:
             - containerPort: 3000
