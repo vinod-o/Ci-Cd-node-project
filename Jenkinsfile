@@ -5,9 +5,6 @@ pipeline{
         IMAGE_BACKEND = "${DOCKER_HUB}/backend"
         IMAGE_FRONTEND = "${DOCKER_HUB}/frontent"
     }
-    tools {
-    sonarQube 'sonar-scanner'
-    }
     stages{
         stage("checkout"){
             steps{
@@ -18,14 +15,7 @@ pipeline{
         stage('sast'){
             steps{
                 script {
-                    def scannerHome = tool 'sonar-scanner'
                     
-                    withSonarQubeEnv('sonarqube') {
-                        sh """
-                        ${scannerHome}/bin/sonar-scanner \
-                          -Dsonar.projectKey=ci-cdproject \
-                          -Dsonar.sources=backend,frontent
-                        """
                     }
                 }
             }
@@ -51,6 +41,14 @@ pipeline{
                     docker push ${IMAGE_BACKEND}:${BUILD_NUMBER} '''
                     echo "pushed sucessfully"
                 }
+            }
+        }
+        stage("deployment to eks"){
+            steps{
+                echo "applying all mainfiestfiels"
+                sh '''
+                 kubectl apply -f k8s/ 
+                 '''
             }
         }
     }
