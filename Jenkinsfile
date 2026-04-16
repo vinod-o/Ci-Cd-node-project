@@ -52,7 +52,7 @@ pipeline{
 
                     git add .
                     git commit -m "new build number added"
-                    git push https://${githubtoken}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                    git push https://${GIT_USER_NAME}:${githubtoken}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
 
                     '''
                 }
