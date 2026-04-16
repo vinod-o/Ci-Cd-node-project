@@ -43,13 +43,5 @@ pipeline{
                 }
             }
         }
-        stage("deployment to eks"){
-            steps{
-                echo "applying all mainfiestfiels"
-                sh '''
-                 kubectl apply -f k8s/ 
-                 '''
-            }
-        }
     }
 }
