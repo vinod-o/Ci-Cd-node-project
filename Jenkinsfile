@@ -12,14 +12,6 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/vinod-o/Ci-Cd-node-project.git'
             }
         }
-        stage('sast'){
-            steps{
-                script {
-                    
-                    }
-                }
-            }
-        }
         stage("docker build"){
             steps{
                 echo "build the image backend"
