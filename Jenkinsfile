@@ -55,6 +55,7 @@ pipeline{
                     git push https://${GIT_USER_NAME}:${githubtoken}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
 
                     '''
+                    echo "pushed sucessfully"
                 }
 
             }
